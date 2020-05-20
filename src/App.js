@@ -48,7 +48,7 @@ function App() {
   return (
     <>
       <TodoForm onAddTodo={onAddTodo} />
-      <Filter onUpdateFilter={onUpdateFilter} />
+      <Filter onUpdateFilter={onUpdateFilter} filter={filter} />
       <TodoList todos={shownTodos} onRemoveTodo={onRemoveTodo} />
     </>
   )
