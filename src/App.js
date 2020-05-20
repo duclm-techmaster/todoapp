@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import TodoList from './components/TodoList'
 import TodoForm from './components/TodoForm'
+import Filter from './components/Filter'
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
   return (
     <>
       <TodoForm onAddTodo={onAddTodo}/>
+      <Filter />
       <TodoList todos={todos} onRemoveTodo={onRemoveTodo}/>
     </>
   )
