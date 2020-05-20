@@ -6,9 +6,26 @@ import Filter from './components/Filter'
 
 function App() {
   const [todos, setTodos] = useState([
-    { id: 1, content: 'Buy milk', completed: false},
-    { id: 2, content: 'Buy peanut', completed: true}
+    { id: 1, content: 'Buy milk', completed: false },
+    { id: 2, content: 'Buy peanut', completed: true }
   ])
+
+  const [filter, setFilter] = useState('All')
+
+  let shownTodos
+  switch (filter) {
+    case 'Completed':
+      shownTodos = todos.filter(todo => todo.completed)
+      break;
+
+    case 'Active':
+      shownTodos = todos.filter(todo => !todo.completed)
+      break;
+
+    default:
+      shownTodos = todos
+      break;
+  }
 
   const onRemoveTodo = id => {
     setTodos(todos.filter(todo => todo.id !== id))
@@ -26,9 +43,9 @@ function App() {
 
   return (
     <>
-      <TodoForm onAddTodo={onAddTodo}/>
+      <TodoForm onAddTodo={onAddTodo} />
       <Filter />
-      <TodoList todos={todos} onRemoveTodo={onRemoveTodo}/>
+      <TodoList todos={shownTodos} onRemoveTodo={onRemoveTodo} />
     </>
   )
 }
