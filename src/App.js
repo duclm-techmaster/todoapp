@@ -45,11 +45,21 @@ function App() {
     setFilter(filter)
   }
 
+  const onToggleCompleted = id => {
+    setTodos(todos.map(todo =>
+      todo.id === id
+        ? {
+          ...todo,
+          completed: !todo.completed
+        } : todo
+    ))
+  }
+
   return (
     <>
       <TodoForm onAddTodo={onAddTodo} />
       <Filter onUpdateFilter={onUpdateFilter} filter={filter} />
-      <TodoList todos={shownTodos} onRemoveTodo={onRemoveTodo} />
+      <TodoList todos={shownTodos} onRemoveTodo={onRemoveTodo} onToggleCompleted={onToggleCompleted} />
     </>
   )
 }
