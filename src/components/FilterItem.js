@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function FilterItem({text}) {
+export default function FilterItem({ text, onUpdateFilter }) {
   return (
-    <button>{text}</button>
+    <button onClick={() => onUpdateFilter(text)}>{text}</button>
   )
 }

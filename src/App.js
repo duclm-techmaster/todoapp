@@ -41,10 +41,14 @@ function App() {
     ])
   }
 
+  const onUpdateFilter = filter => {
+    setFilter(filter)
+  }
+
   return (
     <>
       <TodoForm onAddTodo={onAddTodo} />
-      <Filter />
+      <Filter onUpdateFilter={onUpdateFilter} />
       <TodoList todos={shownTodos} onRemoveTodo={onRemoveTodo} />
     </>
   )
