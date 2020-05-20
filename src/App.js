@@ -5,8 +5,8 @@ import TodoForm from './components/TodoForm'
 
 function App() {
   const [todos, setTodos] = useState([
-    { id: 1, content: 'Buy milk'},
-    { id: 2, content: 'Buy peanut'}
+    { id: 1, content: 'Buy milk', completed: false},
+    { id: 2, content: 'Buy peanut', completed: true}
   ])
 
   const onRemoveTodo = id => {
