@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import TodoList from './components/TodoList'
 import TodoForm from './components/TodoForm'
 import Filter from './components/Filter'
-
+import { FILTER } from './constant'
 
 function App() {
   const [todos, setTodos] = useState([
@@ -10,15 +10,15 @@ function App() {
     { id: 2, content: 'Buy peanut', completed: true }
   ])
 
-  const [filter, setFilter] = useState('All')
+  const [filter, setFilter] = useState(FILTER.ALL)
 
   let shownTodos
   switch (filter) {
-    case 'Completed':
+    case FILTER.COMPLETED:
       shownTodos = todos.filter(todo => todo.completed)
       break;
 
-    case 'Active':
+    case FILTER.ACTIVE:
       shownTodos = todos.filter(todo => !todo.completed)
       break;
 
