@@ -36,7 +36,8 @@ function App() {
       ...todos,
       {
         id: Math.floor(Math.random() * 1000),
-        content: newTodoContent
+        content: newTodoContent,
+        completed: false
       }
     ])
   }
