@@ -56,13 +56,20 @@ function App() {
   }
 
   const onToggleCompleted = id => {
-    setTodos(todos.map(todo =>
-      todo.id === id
-        ? {
-          ...todo,
-          completed: !todo.completed
-        } : todo
-    ))
+    const todoToBeUpdated = todos.find(todo => todo.id === id)
+
+    // Dùng PATCH để update 1 phần của todo
+    // Dùng PUT để thay thế toàn bộ todo cũ bằng todo mới
+    axios
+      .patch(`http://localhost:3001/todos/${id}`, { // Update trên server
+        completed: !todoToBeUpdated.completed
+      })
+      .then(response => setTodos(todos.map(todo => // Update trong state
+        todo.id === id
+          ? response.data
+          : todo
+        )
+      ))
   }
 
   return (
