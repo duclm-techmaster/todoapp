@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import TodoList from './components/TodoList'
 import TodoForm from './components/TodoForm'
 import Filter from './components/Filter'
 import { FILTER } from './constant'
+import axios from 'axios'
 
 function App() {
-  const [todos, setTodos] = useState([
-    { id: 1, content: 'Buy milk', completed: false },
-    { id: 2, content: 'Buy peanut', completed: true }
-  ])
+  const [todos, setTodos] = useState([])
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/todos')
+      .then(response => setTodos(response.data))
+  }, [])
 
   const [filter, setFilter] = useState(FILTER.ALL)
 
