@@ -3,14 +3,14 @@ import TodoList from './components/TodoList'
 import TodoForm from './components/TodoForm'
 import Filter from './components/Filter'
 import { FILTER } from './constant'
-import axios from 'axios'
+import todoServices from './services'
 
 function App() {
   const [todos, setTodos] = useState([])
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/todos')
+    todoServices
+      .getAll()
       .then(response => setTodos(response.data))
       .catch(error => console.error(error))
   }, [])
@@ -33,16 +33,15 @@ function App() {
   }
 
   const onRemoveTodo = id => {
-    // Xóa trên server
-    axios
-      .delete(`http://localhost:3001/todos/${id}`)
+    todoServices
+      .remove(id) // Xóa trên server
       .then(() => setTodos(todos.filter(todo => todo.id !== id))) // Xóa trong state
       .catch(error => console.error(error))
   }
 
   const onAddTodo = newTodoContent => {
-    axios
-      .post('http://localhost:3001/todos', { // Thêm todo trên server
+    todoServices
+      .create({ // Thêm todo trên server
         content: newTodoContent,
         completed: false
       })
@@ -60,10 +59,8 @@ function App() {
   const onToggleCompleted = id => {
     const todoToBeUpdated = todos.find(todo => todo.id === id)
 
-    // Dùng PATCH để update 1 phần của todo
-    // Dùng PUT để thay thế toàn bộ todo cũ bằng todo mới
-    axios
-      .patch(`http://localhost:3001/todos/${id}`, { // Update trên server
+    todoServices
+      .update(id, { // Update trên server
         completed: !todoToBeUpdated.completed
       })
       .then(response => setTodos(todos.map(todo => // Update trong state
