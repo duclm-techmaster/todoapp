@@ -7,30 +7,17 @@ import todoServices from './services'
 
 function App() {
   const [todos, setTodos] = useState([])
+  const [filter, setFilter] = useState(FILTER.ALL)
 
+  /**
+   * Handle todos
+   */
   useEffect(() => {
     todoServices
       .getAll()
       .then(response => setTodos(response.data))
       .catch(error => console.error(error))
   }, [])
-
-  const [filter, setFilter] = useState(FILTER.ALL)
-
-  let shownTodos
-  switch (filter) {
-    case FILTER.COMPLETED:
-      shownTodos = todos.filter(todo => todo.completed)
-      break;
-
-    case FILTER.ACTIVE:
-      shownTodos = todos.filter(todo => !todo.completed)
-      break;
-
-    default:
-      shownTodos = todos
-      break;
-  }
 
   const onRemoveTodo = id => {
     todoServices
@@ -52,10 +39,6 @@ function App() {
       .catch(error => console.error(error))
   }
 
-  const onUpdateFilter = filter => {
-    setFilter(filter)
-  }
-
   const onToggleCompleted = id => {
     const todoToBeUpdated = todos.find(todo => todo.id === id)
 
@@ -67,9 +50,32 @@ function App() {
         todo.id === id
           ? response.data
           : todo
-        )
+      )
       ))
       .catch(error => console.error(error))
+  }
+
+
+  /**
+   * Handle filter
+   */
+  let shownTodos
+  switch (filter) {
+    case FILTER.COMPLETED:
+      shownTodos = todos.filter(todo => todo.completed)
+      break;
+
+    case FILTER.ACTIVE:
+      shownTodos = todos.filter(todo => !todo.completed)
+      break;
+
+    default:
+      shownTodos = todos
+      break;
+  }
+  
+  const onUpdateFilter = filter => {
+    setFilter(filter)
   }
 
   return (
