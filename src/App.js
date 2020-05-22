@@ -36,14 +36,15 @@ function App() {
   }
 
   const onAddTodo = newTodoContent => {
-    setTodos([
-      ...todos,
-      {
-        id: Math.floor(Math.random() * 1000),
+    axios
+      .post('http://localhost:3001/todos', { // Thêm todo trên server
         content: newTodoContent,
         completed: false
-      }
-    ])
+      })
+      .then(response => setTodos([ // Thêm todo trong state
+        ...todos,
+        response.data
+      ]))
   }
 
   const onUpdateFilter = filter => {
