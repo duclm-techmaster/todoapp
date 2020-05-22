@@ -32,6 +32,10 @@ function App() {
   }
 
   const onRemoveTodo = id => {
+    // Xóa trên server
+    axios.delete(`http://localhost:3001/todos/${id}`)
+
+    // Xóa trong state
     setTodos(todos.filter(todo => todo.id !== id))
   }
 
