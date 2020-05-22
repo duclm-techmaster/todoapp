@@ -12,6 +12,7 @@ function App() {
     axios
       .get('http://localhost:3001/todos')
       .then(response => setTodos(response.data))
+      .catch(error => console.error(error))
   }, [])
 
   const [filter, setFilter] = useState(FILTER.ALL)
@@ -33,10 +34,10 @@ function App() {
 
   const onRemoveTodo = id => {
     // Xóa trên server
-    axios.delete(`http://localhost:3001/todos/${id}`)
-
-    // Xóa trong state
-    setTodos(todos.filter(todo => todo.id !== id))
+    axios
+      .delete(`http://localhost:3001/todos/${id}`)
+      .then(() => setTodos(todos.filter(todo => todo.id !== id))) // Xóa trong state
+      .catch(error => console.error(error))
   }
 
   const onAddTodo = newTodoContent => {
@@ -49,6 +50,7 @@ function App() {
         ...todos,
         response.data
       ]))
+      .catch(error => console.error(error))
   }
 
   const onUpdateFilter = filter => {
@@ -70,6 +72,7 @@ function App() {
           : todo
         )
       ))
+      .catch(error => console.error(error))
   }
 
   return (
