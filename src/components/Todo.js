@@ -1,9 +1,12 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 
 function Todo({ todo, onRemoveTodo, onToggleCompleted }) {
   const styleObj = {
     textDecoration: todo.completed ? 'line-through' : 'none'
   }
+
+  const dispatch = useDispatch()
 
   return <tr>
     <td
@@ -13,7 +16,10 @@ function Todo({ todo, onRemoveTodo, onToggleCompleted }) {
       {todo.content}
     </td>
     <td>
-      <button onClick={() => onRemoveTodo(todo.id)}>&times;</button>
+      <button onClick={() => dispatch({
+        type: "REMOVE_TODO",
+        id: todo.id
+      })}>&times;</button>
     </td>
   </tr>
 }

@@ -16,9 +16,9 @@ export default function(state = initialState, action) {
     //   ]
     // }
 
-    // case "REMOVE_TODO": {
-    //   return state.filter(todo => todo.id !== id)
-    // }
+    case "REMOVE_TODO": {
+      return state.filter(todo => todo.id !== action.id)
+    }
 
     // case "TOGGLE_TODO": {
     //   return state.map(todo =>
