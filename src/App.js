@@ -13,6 +13,7 @@ function App() {
     todoService
       .getAll()
       .then(res => dispatch(fetchTodos(res.data)))
+      .catch(e => console.error(e))
   }, [dispatch])
 
   return (

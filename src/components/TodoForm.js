@@ -16,6 +16,7 @@ function TodoForm() {
         completed: false
       })
       .then(res => dispatch(addTodo(res.data)))
+      .catch(e => console.error(e))
     
     setValue('')
   }

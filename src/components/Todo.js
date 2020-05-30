@@ -18,12 +18,14 @@ function Todo({ todo }) {
         completed: !todo.completed
       })
       .then(res => dispatch(toggleTodo(res.data)))
+      .catch(e => console.error(e))
   }
 
   const onRemoveTodo = () => {
     todoServices
       .remove(todoId)
       .then(() => dispatch(removeTodo(todoId)))
+      .catch(e => console.error(e))
   }
 
   return <tr>
