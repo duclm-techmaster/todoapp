@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addTodo } from '../redux/actions/todos'
-import axios from 'axios'
+import todoServices from '../services'
 
 function TodoForm() {
   const [value, setValue] = useState('')
@@ -10,8 +10,8 @@ function TodoForm() {
   const onFormSubmit = e => {
     e.preventDefault()
     
-    axios
-      .post('http://localhost:3001/todos', {
+    todoServices
+      .create({
         content: value,
         completed: false
       })

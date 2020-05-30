@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { removeTodo, toggleTodo } from '../redux/actions/todos'
-import axios from 'axios'
+import todoServices from '../services'
 
 function Todo({ todo }) {
   const styleObj = {
@@ -13,16 +13,16 @@ function Todo({ todo }) {
   const todoId = todo.id
 
   const onToggleTodo = () => {
-    axios
-      .patch(`http://localhost:3001/todos/${todoId}`, {
+    todoServices
+      .update(todoId, {
         completed: !todo.completed
       })
       .then(res => dispatch(toggleTodo(res.data)))
   }
 
   const onRemoveTodo = () => {
-    axios
-      .delete(`http://localhost:3001/todos/${todoId}`)
+    todoServices
+      .remove(todoId)
       .then(() => dispatch(removeTodo(todoId)))
   }
 
