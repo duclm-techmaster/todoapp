@@ -1,7 +1,4 @@
-const initialState = [
-  { id: 1, content: 'Buy milk', completed: false },
-  { id: 2, content: 'Buy peanut', completed: true }
-]
+const initialState = []
 
 export default function(state = initialState, action) {
   switch (action.type) {
@@ -12,11 +9,7 @@ export default function(state = initialState, action) {
     case "ADD_TODO": {
       return [
         ...state,
-        {
-          id: Math.floor(Math.random() * 1000),
-          content: action.content,
-          completed: false
-        }
+        action.newTodo
       ]
     }
 
@@ -26,11 +19,8 @@ export default function(state = initialState, action) {
 
     case "TOGGLE_TODO": {
       return state.map(todo =>
-        todo.id === action.id
-          ? {
-            ...todo,
-            completed: !todo.completed
-          } : todo
+        todo.id === action.updatedTodo.id
+          ? action.updatedTodo : todo
       )
     }
 

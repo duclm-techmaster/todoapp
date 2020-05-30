@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { removeTodo, toggleTodo } from '../redux/actions/todos'
+import axios from 'axios'
 
 function Todo({ todo }) {
   const styleObj = {
@@ -9,15 +10,31 @@ function Todo({ todo }) {
 
   const dispatch = useDispatch()
 
+  const todoId = todo.id
+
+  const onToggleTodo = () => {
+    axios
+      .patch(`http://localhost:3001/todos/${todoId}`, {
+        completed: !todo.completed
+      })
+      .then(res => dispatch(toggleTodo(res.data)))
+  }
+
+  const onRemoveTodo = () => {
+    axios
+      .delete(`http://localhost:3001/todos/${todoId}`)
+      .then(() => dispatch(removeTodo(todoId)))
+  }
+
   return <tr>
     <td
       style={styleObj}
-      onClick={() => dispatch(toggleTodo(todo.id))}
+      onClick={onToggleTodo}
     >
       {todo.content}
     </td>
     <td>
-      <button onClick={() => dispatch(removeTodo(todo.id))}>&times;</button>
+      <button onClick={onRemoveTodo}>&times;</button>
     </td>
   </tr>
 }

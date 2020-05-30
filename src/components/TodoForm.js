@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addTodo } from '../redux/actions/todos'
+import axios from 'axios'
 
 function TodoForm() {
   const [value, setValue] = useState('')
@@ -9,8 +10,13 @@ function TodoForm() {
   const onFormSubmit = e => {
     e.preventDefault()
     
-    dispatch(addTodo(value))
-
+    axios
+      .post('http://localhost:3001/todos', {
+        content: value,
+        completed: false
+      })
+      .then(res => dispatch(addTodo(res.data)))
+    
     setValue('')
   }
 

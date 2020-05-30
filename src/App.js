@@ -13,7 +13,7 @@ function App() {
     axios
       .get('http://localhost:3001/todos')
       .then(res => dispatch(fetchTodos(res.data)))
-  }, [])
+  }, [dispatch])
 
   return (
     <>

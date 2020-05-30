@@ -3,9 +3,9 @@ export const fetchTodos = allTodos => ({
   allTodos
 })
 
-export const addTodo = content => ({
+export const addTodo = newTodo => ({
   type: 'ADD_TODO',
-  content
+  newTodo
 })
 
 export const removeTodo = id => ({
@@ -13,7 +13,7 @@ export const removeTodo = id => ({
   id
 })
 
-export const toggleTodo = id => ({
+export const toggleTodo = updatedTodo => ({
   type: 'TOGGLE_TODO',
-  id
+  updatedTodo
 })
