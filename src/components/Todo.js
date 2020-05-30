@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 
-function Todo({ todo, onRemoveTodo, onToggleCompleted }) {
+function Todo({ todo }) {
   const styleObj = {
     textDecoration: todo.completed ? 'line-through' : 'none'
   }
@@ -11,7 +11,10 @@ function Todo({ todo, onRemoveTodo, onToggleCompleted }) {
   return <tr>
     <td
       style={styleObj}
-      onClick={() => onToggleCompleted(todo.id)}
+      onClick={() => dispatch({
+        type: "TOGGLE_TODO",
+        id: todo.id
+      })}
     >
       {todo.content}
     </td>
