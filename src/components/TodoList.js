@@ -1,16 +1,28 @@
 import React from 'react'
 import Todo from './Todo'
 import { useSelector } from 'react-redux'
+import { FILTER } from '../constant'
 
 function TodoList() {
-  const todos = useSelector(state => state.todos)
+  const shownTodos = useSelector(state => {
+    switch (state.filter) {
+      case FILTER.COMPLETED:
+        return state.todos.filter(todo => todo.completed)
+
+      case FILTER.ACTIVE:
+        return state.todos.filter(todo => !todo.completed)
+
+      default: 
+        return state.todos
+    }
+  })
 
   return (
     <>
       <h1>Todo List</h1>
       <table>
         <tbody>
-          {todos.map(todo =>
+          {shownTodos.map(todo =>
             <Todo key={todo.id} todo={todo} />
           )}
         </tbody>
