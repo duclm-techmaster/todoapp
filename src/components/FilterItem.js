@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { updateFilter } from '../redux/actions/filter'
 
 export default function FilterItem({ text }) {
   const filter = useSelector(state => state.filter)
@@ -7,10 +8,7 @@ export default function FilterItem({ text }) {
 
   return (
     <button 
-      onClick={() => dispatch({
-        type: 'UPDATE_FILTER',
-        filter: text
-      })}
+      onClick={() => dispatch(updateFilter(text))}
       disabled={filter === text}
     >
       {text}

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import { removeTodo, toggleTodo } from '../redux/actions/todos'
 
 function Todo({ todo }) {
   const styleObj = {
@@ -11,18 +12,12 @@ function Todo({ todo }) {
   return <tr>
     <td
       style={styleObj}
-      onClick={() => dispatch({
-        type: "TOGGLE_TODO",
-        id: todo.id
-      })}
+      onClick={() => dispatch(toggleTodo(todo.id))}
     >
       {todo.content}
     </td>
     <td>
-      <button onClick={() => dispatch({
-        type: "REMOVE_TODO",
-        id: todo.id
-      })}>&times;</button>
+      <button onClick={() => dispatch(removeTodo(todo.id))}>&times;</button>
     </td>
   </tr>
 }
