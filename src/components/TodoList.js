@@ -1,8 +1,9 @@
 import React from 'react'
 import Todo from './Todo'
+import { useSelector } from 'react-redux'
 
-function TodoList(props) {
-  const { todos, ...rest } = props
+function TodoList() {
+  const todos = useSelector(state => state.todos)
 
   return (
     <>
@@ -10,7 +11,7 @@ function TodoList(props) {
       <table>
         <tbody>
           {todos.map(todo =>
-            <Todo key={todo.id} todo={todo} {...rest} />
+            <Todo key={todo.id} todo={todo} />
           )}
         </tbody>
       </table>
