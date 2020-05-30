@@ -1,3 +1,8 @@
+export const fetchTodos = allTodos => ({
+  type: 'FETCH_TODOS',
+  allTodos
+})
+
 export const addTodo = content => ({
   type: 'ADD_TODO',
   content
