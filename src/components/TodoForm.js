@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
-function TodoForm({onAddTodo}) {
+function TodoForm() {
   const [value, setValue] = useState('')
+  const dispatch = useDispatch()
 
   const onFormSubmit = e => {
     e.preventDefault()
-
-    if (!onAddTodo) return
     
-    onAddTodo(value)
+    dispatch({
+      type: "ADD_TODO",
+      content: value
+    })
 
     setValue('')
   }

@@ -21,7 +21,7 @@ function App() {
 
   return (
     <>
-      {/* <TodoForm onAddTodo={onAddTodo} /> */}
+      <TodoForm />
       {/* <Filter onUpdateFilter={onUpdateFilter} filter={filter} /> */}
       <TodoList />
     </>

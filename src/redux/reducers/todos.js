@@ -5,16 +5,16 @@ const initialState = [
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    // case "ADD_TODO": {
-    //   return [
-    //     ...state,
-    //     {
-    //       id: Math.floor(Math.random() * 1000),
-    //       content: newTodoContent,
-    //       completed: false
-    //     }
-    //   ]
-    // }
+    case "ADD_TODO": {
+      return [
+        ...state,
+        {
+          id: Math.floor(Math.random() * 1000),
+          content: action.content,
+          completed: false
+        }
+      ]
+    }
 
     case "REMOVE_TODO": {
       return state.filter(todo => todo.id !== action.id)
