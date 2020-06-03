@@ -2,18 +2,14 @@ import React, { useEffect } from 'react'
 import TodoList from './components/TodoList'
 import TodoForm from './components/TodoForm'
 import Filter from './components/Filter'
-import { fetchTodos } from './redux/actions/todos'
+import { fetchTodosAsync } from './redux/actions/todos'
 import { useDispatch } from 'react-redux'
-import todoService from './services'
 
 function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    todoService
-      .getAll()
-      .then(res => dispatch(fetchTodos(res.data)))
-      .catch(e => console.error(e))
+    dispatch(fetchTodosAsync())
   }, [dispatch])
 
   return (

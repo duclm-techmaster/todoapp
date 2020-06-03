@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { addTodo } from '../redux/actions/todos'
-import todoServices from '../services'
+import { addTodoAsync } from '../redux/actions/todos'
 
 function TodoForm() {
   const [value, setValue] = useState('')
@@ -9,14 +8,11 @@ function TodoForm() {
 
   const onFormSubmit = e => {
     e.preventDefault()
-    
-    todoServices
-      .create({
-        content: value,
-        completed: false
-      })
-      .then(res => dispatch(addTodo(res.data)))
-      .catch(e => console.error(e))
+
+    dispatch(addTodoAsync({
+      content: value,
+      completed: false
+    }))
     
     setValue('')
   }
